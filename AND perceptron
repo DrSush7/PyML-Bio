@@ -1,0 +1,65 @@
+import time
+
+inputs = [[0,0], [0,1], [1,0], [1,1]]
+labels = [0,0,0,1]
+
+weights = [1, 1.2]
+bias = 0.1
+
+#define learning rate
+learn_rate = 0.1
+
+epochs = 5
+
+for i in range(epochs):
+    for signal in range(len(inputs)):
+        x1 = inputs[signal][0]
+        x2 = inputs[signal][1]
+        raw = weights[0]*x1 + weights[1]*x2 + bias
+
+        if raw > 0:
+            rawout = 1
+        else:
+            rawout = 0
+
+        #define error
+        error = labels[signal] - rawout
+
+        #update weights + bias
+        weights[0] = weights[0] + (inputs[signal][0] * error * learn_rate)
+        weights[1] = weights[1] + (inputs[signal][1] * error * learn_rate)
+        bias = bias + (1 * error * learn_rate)
+
+    print( "1st Weight: ", weights[0])
+    print( "2nd Weight: ", weights[1])
+    print( "Bias: ", bias)
+
+    print()
+
+    time.sleep(1)
+
+for signal in range(len(inputs)):
+
+    x1 = inputs[signal][0]
+    x2 = inputs[signal][1]
+    print("Signal 1: ", x1)
+    print("Signal 2: ", x2)
+
+    if signal == 0:
+
+        print( "1st Weight: ", weights[0])
+        print( "2nd Weight: ", weights[1])
+        print("Bias: ", bias)
+
+    raw = weights[0] * x1 + weights[1] * x2 + bias
+    print("Raw value: ", raw)
+
+    if raw > 0:
+        rawout = 1
+    else:
+        rawout = 0
+    print("Output: ", rawout)
+
+    print()
+
+    time.sleep(1)
